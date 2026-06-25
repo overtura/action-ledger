@@ -118,6 +118,9 @@ action-ledger scan PATH [PATH ...] [--format table|json|markdown] [--output FILE
 있습니다. 실제 CLI가 있고, 문서가 짧으며, target 전용 문서 eval이 포함되어
 있습니다.
 
+처음 연결할 때는 [자가 개선 기능 추가 매뉴얼](docs/SELF_IMPROVING_SETUP.md)을
+따라 하세요.
+
 권장 target 설정:
 
 ```env
