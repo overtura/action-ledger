@@ -133,10 +133,10 @@ TARGET_EVALS_PATH=evals/docs_qa.jsonl
 
 처음 시도하기 좋은 개선 작업:
 
-- `docs/USAGE.md`에 Windows/PowerShell 예시 보강
-- `--format markdown` 출력 예시 추가
-- JSON 보고서 스키마 설명 추가
-- `P1`, `P2` 같은 우선순위 마커 지원
+- GitHub Actions 사용 예시 문서 추가
+- `--format markdown` 출력 예시를 실제 표 형태로 보강
+- fork target으로 먼저 실행하는 자가 개선 예시 추가
+- `P1`, `P2` 같은 우선순위 마커 지원 검토
 
 ## 개발
 
