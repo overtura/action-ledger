@@ -14,16 +14,16 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="action-ledger")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    scan = subparsers.add_parser("scan", help="Scan Markdown files for action items.")
-    scan.add_argument("paths", nargs="+", help="Markdown files or directories to scan.")
+    scan = subparsers.add_parser("scan", help="Markdown 파일에서 작업 항목을 스캔합니다.")
+    scan.add_argument("paths", nargs="+", help="스캔할 Markdown 파일 또는 디렉터리입니다.")
     scan.add_argument(
         "--format",
         choices=["table", "json", "markdown"],
         default="table",
-        help="Output format.",
+        help="출력 형식입니다.",
     )
-    scan.add_argument("--output", help="Write the report to a file.")
-    scan.add_argument("--max-open", type=int, help="Fail when open item count is above N.")
+    scan.add_argument("--output", help="보고서를 파일로 씁니다.")
+    scan.add_argument("--max-open", type=int, help="열린 항목 수가 N보다 많으면 실패합니다.")
     return parser
 
 
@@ -36,7 +36,7 @@ def main(argv: list[str] | None = None) -> int:
         open_count = count_by_status(items).get("open", 0)
         if args.max_open is not None and open_count > args.max_open:
             print(
-                f"Open action count {open_count} is greater than --max-open {args.max_open}.",
+                f"열린 작업 수 {open_count}개가 --max-open {args.max_open} 기준을 넘었습니다.",
                 file=sys.stderr,
             )
             return 1
@@ -66,16 +66,16 @@ def render_json(items: list[ActionItem]) -> str:
 
 def render_table(items: list[ActionItem]) -> str:
     lines = [
-        "Action Ledger Report",
-        f"Total: {len(items)}",
-        f"Open: {count_by_status(items).get('open', 0)}",
+        "액션 레저 보고서",
+        f"전체: {len(items)}",
+        f"열림: {count_by_status(items).get('open', 0)}",
         "",
-        "STATUS    KIND      SOURCE:LINE  TEXT",
+        "상태      종류      출처:줄      내용",
         "--------  --------  -----------  ----",
     ]
     for item in items:
         lines.append(
-            f"{item.status:<8}  {item.kind:<8}  "
+            f"{display_status(item.status):<8}  {display_kind(item.kind):<8}  "
             f"{item.source.as_posix()}:{item.line:<4}  {item.text}"
         )
     return "\n".join(lines)
@@ -83,17 +83,20 @@ def render_table(items: list[ActionItem]) -> str:
 
 def render_markdown(items: list[ActionItem]) -> str:
     lines = [
-        "# Action Ledger Report",
+        "# 액션 레저 보고서",
         "",
-        f"- Total: {len(items)}",
-        f"- Open: {count_by_status(items).get('open', 0)}",
+        f"- 전체: {len(items)}",
+        f"- 열림: {count_by_status(items).get('open', 0)}",
         "",
-        "| Status | Kind | Source | Text |",
+        "| 상태 | 종류 | 출처 | 내용 |",
         "| ------ | ---- | ------ | ---- |",
     ]
     for item in items:
         source = f"{item.source.as_posix()}:{item.line}"
-        lines.append(f"| {item.status} | {item.kind} | `{source}` | {item.text} |")
+        lines.append(
+            f"| {display_status(item.status)} | {display_kind(item.kind)} | "
+            f"`{source}` | {item.text} |"
+        )
     return "\n".join(lines)
 
 
@@ -103,6 +106,25 @@ def count_by_status(items: list[ActionItem]) -> Counter[str]:
 
 def count_by_kind(items: list[ActionItem]) -> Counter[str]:
     return Counter(item.kind for item in items)
+
+
+def display_status(status: str) -> str:
+    labels = {
+        "open": "열림",
+        "done": "완료",
+        "recorded": "기록",
+    }
+    return labels.get(status, status)
+
+
+def display_kind(kind: str) -> str:
+    labels = {
+        "task": "작업",
+        "todo": "할일",
+        "fixme": "수정",
+        "decision": "결정",
+    }
+    return labels.get(kind, kind)
 
 
 def write_or_print(report: str, *, output: str | None) -> None:

@@ -23,3 +23,15 @@ def test_max_open_returns_failure_when_threshold_is_exceeded(tmp_path: Path) -> 
     code = main(["scan", str(notes), "--max-open", "1"])
 
     assert code == 1
+
+
+def test_markdown_output_uses_korean_labels(tmp_path: Path, capsys) -> None:
+    notes = tmp_path / "notes.md"
+    notes.write_text("할일: 한국어 보고서 확인 #docs\n", encoding="utf-8")
+
+    code = main(["scan", str(notes), "--format", "markdown"])
+
+    captured = capsys.readouterr()
+    assert code == 0
+    assert "# 액션 레저 보고서" in captured.out
+    assert "| 열림 | 할일 |" in captured.out

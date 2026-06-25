@@ -1,10 +1,54 @@
-# Agent Instructions
+# 에이전트 작업 지침
 
-This repository is a small Python CLI. Keep changes focused and easy to review.
+이 레포는 한국어 기준으로 운영하는 작은 Python CLI 프로젝트입니다. 변경은 작고
+검토하기 쉽게 유지합니다.
 
-- Preserve the public CLI command: `action-ledger scan`.
-- Prefer standard library code unless a dependency removes meaningful complexity.
-- Update docs when CLI behavior changes.
-- Run `python -m pytest` before committing code changes.
-- Keep generated reports untracked.
-- Do not add network calls to the scanner.
+## 언어 기준
+
+- 사용자에게 보이는 문서, 커밋 설명, PR 제목, PR 본문, 작업 요약은 한국어로 작성합니다.
+- Conventional 타입은 유지할 수 있습니다. 예: `[feat] Markdown 보고서 예시 추가`
+- CLI 명령어, 옵션명, Python API, JSON 키는 호환성을 위해 영어를 유지합니다.
+- 영어 문구를 추가해야 한다면 한국어 설명을 먼저 두고, 필요한 경우 괄호 안에 영어를 병기합니다.
+
+## 커밋 기준
+
+커밋 메시지 기본 형식:
+
+```text
+[type] 한국어 제목
+
+- 한국어 변경 요약
+- 한국어 검증 요약
+```
+
+권장 타입:
+
+- `[feat]`: 기능 추가
+- `[fix]`: 버그 수정 또는 안정화
+- `[docs]`: 문서 변경
+- `[refactor]`: 동작 변경 없는 구조 개선
+- `[test]`: 테스트 변경
+- `[chore]`: 설정, CI, 기타 유지보수
+
+## PR 기준
+
+PR 제목과 본문은 한국어로 작성합니다. 기본 본문 구조:
+
+```markdown
+## 목적
+
+## 주요 변경
+
+## 검증
+
+## 남은 위험
+```
+
+## 구현 기준
+
+- 공개 CLI 명령 `action-ledger scan`은 유지합니다.
+- 의미 있는 복잡도를 줄이지 못하는 의존성은 추가하지 않습니다.
+- CLI 동작이 바뀌면 문서와 테스트를 같이 갱신합니다.
+- 코드 변경 전후로 `python -m pytest`를 실행합니다.
+- 생성된 보고서는 커밋하지 않습니다.
+- 스캐너에 네트워크 호출을 추가하지 않습니다.

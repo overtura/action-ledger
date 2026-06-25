@@ -1,17 +1,18 @@
-# Roadmap
+# 로드맵
 
-## Version 0.1
+## 버전 0.1
 
-- [x] Parse Markdown checkboxes
-- [x] Parse TODO, FIXME, and DECISION markers
-- [x] Render table, JSON, and Markdown reports
-- [x] Support CI threshold with `--max-open`
+- [x] Markdown 체크박스 파싱
+- [x] `TODO`, `FIXME`, `DECISION` 마커 파싱
+- [x] `할일`, `수정`, `결정` 한국어 마커 파싱
+- [x] table, JSON, Markdown 보고서 출력
+- [x] `--max-open` CI 기준 지원
 
-## Version 0.2 Ideas
+## 버전 0.2 후보
 
-- [ ] Add priority markers such as `P1` and `P2` #parser
-- [ ] Add `--tag` filtering #cli
-- [ ] Add `--owner` filtering #cli
-- [ ] Add a GitHub Actions example workflow #docs
+- [ ] `P1`, `P2` 같은 우선순위 마커 추가 #parser
+- [ ] `--tag` 필터 추가 #cli
+- [ ] `--owner` 필터 추가 #cli
+- [ ] GitHub Actions 사용 예시 문서 추가 #docs
 
-DECISION: Keep version 0.1 dependency-free so it is easy to run in CI.
+결정: 버전 0.1은 CI에서 쉽게 실행되도록 런타임 의존성 없이 유지합니다.

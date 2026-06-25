@@ -7,7 +7,10 @@ from action_ledger.models import ActionItem
 
 
 CHECKBOX_RE = re.compile(r"^\s*[-*]\s+\[(?P<mark>[ xX])\]\s+(?P<text>.+)$")
-MARKER_RE = re.compile(r"\b(?P<kind>TODO|FIXME|DECISION):\s*(?P<text>.+)")
+MARKER_RE = re.compile(
+    r"(?P<kind>TODO|FIXME|DECISION|할일|수정|결정):\s*(?P<text>.+)",
+    re.IGNORECASE,
+)
 OWNER_RE = re.compile(r"(?<!\w)@(?P<owner>[A-Za-z0-9_.-]+)")
 TAG_RE = re.compile(r"(?<!\w)#(?P<tag>[A-Za-z0-9_.-]+)")
 
@@ -56,7 +59,7 @@ def scan_file(path: Path) -> list[ActionItem]:
 
         marker = MARKER_RE.search(line)
         if marker:
-            kind = marker.group("kind").lower()
+            kind = normalize_kind(marker.group("kind"))
             status = "recorded" if kind == "decision" else "open"
             items.append(
                 build_item(
@@ -68,6 +71,16 @@ def scan_file(path: Path) -> list[ActionItem]:
                 )
             )
     return items
+
+
+def normalize_kind(kind: str) -> str:
+    normalized = kind.lower()
+    aliases = {
+        "할일": "todo",
+        "수정": "fixme",
+        "결정": "decision",
+    }
+    return aliases.get(normalized, normalized)
 
 
 def build_item(
