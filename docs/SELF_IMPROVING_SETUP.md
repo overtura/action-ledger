@@ -27,7 +27,7 @@ action-ledger 문서/eval 확인
 Codex 로그인 확인:
 
 ```powershell
-cd C:\Users\hyounkyu_oh\Documents\Codex\2026-06-25\new-chat\outputs\self-improving-maintainer-bot
+cd "E:\Project Archieve\self-improving-maintainer-bot"
 python -m self_maintainer_bot.cli codex-status
 ```
 
@@ -51,7 +51,7 @@ Copy-Item .env.example .env
 ```env
 TARGET_REPOSITORY=local/action-ledger
 TARGET_DEFAULT_BRANCH=main
-TARGET_WORKTREE=C:\Users\hyounkyu_oh\Documents\Codex\2026-06-25\new-chat\outputs\action-ledger
+TARGET_WORKTREE=E:\Project Archieve\action-ledger
 TARGET_DOC_PATHS=README.md,docs
 TARGET_EVALS_PATH=evals/docs_qa.jsonl
 CODEX_TIMEOUT_SECONDS=3600
@@ -141,7 +141,7 @@ python -m self_maintainer_bot.cli codex-local-loop --scope docs --execute
 Codex 실행 후 `action-ledger` repo에서 diff를 확인합니다.
 
 ```powershell
-cd C:\Users\hyounkyu_oh\Documents\Codex\2026-06-25\new-chat\outputs\action-ledger
+cd "E:\Project Archieve\action-ledger"
 git status --short
 git diff
 python -m pytest
