@@ -1,0 +1,5 @@
+{"id":"install-local","question":"How do I install Action Ledger locally?","must_include":["python -m pip install -e ."],"must_not_include":["npm install"]}
+{"id":"scan-json","question":"How do I write a JSON report?","must_include":["--format json","--output"],"must_not_include":[]}
+{"id":"ci-threshold","question":"How can CI fail when too many open items exist?","must_include":["--max-open","status `1`"],"must_not_include":[]}
+{"id":"supported-markers","question":"Which Markdown markers does Action Ledger support?","must_include":["TODO","FIXME","DECISION"],"must_not_include":[]}
+{"id":"self-improvement-target","question":"Why is this repository useful as a maintainer bot target?","must_include":["evals/docs_qa.jsonl","real CLI"],"must_not_include":[]}
