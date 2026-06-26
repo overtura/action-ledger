@@ -124,7 +124,7 @@ action-ledger scan PATH [PATH ...] [--format table|json|markdown] [--output FILE
 권장 target 설정:
 
 ```env
-TARGET_REPOSITORY=okorion/action-ledger
+TARGET_REPOSITORY=overtura/action-ledger
 TARGET_DEFAULT_BRANCH=main
 TARGET_WORKTREE=targets/action-ledger
 TARGET_DOC_PATHS=README.md,docs

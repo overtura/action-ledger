@@ -57,10 +57,10 @@ TARGET_EVALS_PATH=evals/docs_qa.jsonl
 CODEX_TIMEOUT_SECONDS=3600
 ```
 
-GitHub에 `okorion/action-ledger`로 올린 뒤에는 다음처럼 바꿉니다.
+GitHub에 `overtura/action-ledger`로 올린 뒤에는 다음처럼 바꿉니다.
 
 ```env
-TARGET_REPOSITORY=okorion/action-ledger
+TARGET_REPOSITORY=overtura/action-ledger
 TARGET_DEFAULT_BRANCH=main
 TARGET_WORKTREE=targets/action-ledger
 TARGET_DOC_PATHS=README.md,docs
@@ -78,7 +78,7 @@ python -m self_maintainer_bot.cli target-status
 
 확인할 항목:
 
-- `Repository`가 `local/action-ledger` 또는 `okorion/action-ledger`인지 확인합니다.
+- `Repository`가 `local/action-ledger` 또는 `overtura/action-ledger`인지 확인합니다.
 - `Doc files`가 1개 이상인지 확인합니다.
 - `Eval file exists`가 `yes`인지 확인합니다.
 
